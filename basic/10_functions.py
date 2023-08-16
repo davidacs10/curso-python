@@ -33,3 +33,35 @@ print(my_result)
 
 my_result = sum_two_values_with_return(40, 10)
 print(my_result)
+
+# Función con parámetros de entrada/argumentos por clave
+
+
+def print_name(name, surname):
+    print(f"{name} {surname}")
+
+
+print_name(surname="Campos", name="David")
+
+# Función con parámetros de entrada/argumentos por defecto
+
+
+def print_name_with_default(name, surname, alias="Sin alias"):
+    print(f"{name} {surname} {alias}")
+
+
+print_name_with_default("David", "Campos")
+print_name_with_default("David", "Campos", "d4vidwp")
+
+# Función con parámetros de entrada/argumentos arbitrarios
+
+
+def print_upper_texts(*texts):
+    # Lo interpreta como una tupla
+    print(type(texts))
+    for text in texts:
+        print(text.upper())
+
+
+print_upper_texts("Hola", "David", "Python")
+print_upper_texts("Hola")
