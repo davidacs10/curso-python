@@ -82,6 +82,7 @@
 #     print("That fruit already exist in the list")
 
 # 6 Here we have a person dictionary. Feel free to modify it!
+# 6.1 Check if the person dictionary has skills key, if so print out the middle skill in the skills list.
 person = {
     "first_name": "David",
     "last_name": "Campos",
@@ -93,8 +94,56 @@ person = {
 }
 
 if "skills" in person:
-    i = int(len("skills")) // 3
+    i = len("skills") // 3
     middle_skill = person["skills"][i]
     print(middle_skill)
 else:
     print("No have skills dictionary")
+
+# 6.2 Check if the person dictionary has skills key, if so check if the person has 'Python' skill and print out the result.
+if "skills" in person:
+    ["Python"] in person["skills"]
+    print("Yes it is")
+else:
+    print("No have Python in skills dictionary")
+
+# 6.3 If a person skills has only JavaScript and React, print('He is a front end developer'),
+# if the person skills has Node, Python, MongoDB, print('He is a backend developer'),
+# if the person skills has React, Node and MongoDB, Print('He is a fullstack developer'),
+# else print('unknown title') - for more accurate results more conditions can be nested!
+
+person = {
+    "first_name": "David",
+    "last_name": "Campos",
+    "age": 26,
+    "country": "Venezuela",
+    "is_marred": False,
+    "skills": ["JavaScript", "React", "Node", "MongoDB", "Python"],
+    "address": {"street": "Space street"},
+}
+
+skills = person["skills"]
+
+if len(skills) == 2 and "JavaScript" and "React" in skills:
+    print("He is a front end developer")
+elif len(skills) == 3 and "Node" and "MongoDB" and "Python" in skills:
+    print("He is a backend developer")
+elif "React" and "Node" and "MongoDB" in skills:
+    print("He is a fullstack developer")
+else:
+    print("unknown title")
+
+# 6.4 If the person is married and if he lives in Finland, print the information in the following format:
+first_name = person["first_name"]
+last_name = person["last_name"]
+country = person["country"]
+is_married = person["is_marred"]
+
+if is_married is True and "Venezuela" in country:
+    print("{} {} lives in {}. He is married.".format(first_name, last_name, country))
+elif is_married is False and "Venezuela" in country:
+    print(
+        "{} {} lives in {}. He is not married.".format(first_name, last_name, country)
+    )
+else:
+    print("Anything is real")
