@@ -54,6 +54,67 @@
 #     print(number)
 
 # 9 Use for loop to iterate from 0 to 100 and print the sum of all numbers.
-number = 0
-for i in range(101):
-    print(number + i)
+addition = 0
+for number in range(101):
+    # En esta linea de codigo estamos agregando a la variable suma el resultado de numero + suma
+    addition = number + addition
+    if addition != 5050:
+        continue
+    print(f"The sum of all numbers is {addition}")
+
+# 10 Use for loop to iterate from 0 to 100 and print the sum of all evens and the sum of all odds.
+sum_even = 0
+sum_odd = 0
+for number in range(101):
+    if number % 2 == 0:
+        sum_even += number
+    else:
+        sum_odd += number
+print(f"The sum of all evens is {sum_even}. And the sum of all odds is {sum_odd}.")
+
+# 11 Go to the data folder and use the countries.py file.
+# Loop through the countries and extract all the countries containing the word land.
+
+from countries import countries
+
+countries_with_land = []
+
+for country in countries:
+    if "land" in country.lower():
+        countries_with_land.append(country)
+print("Countries contain word land: ")
+for country in countries_with_land:
+    print(country)
+
+# 12 This is a fruit list, ['banana', 'orange', 'mango', 'lemon'] reverse the order using loop.
+fruit = ["banana", "orange", "mango", "lemon"]
+for i in reversed(fruit):
+    print(i)
+
+fruit = ["banana", "orange", "mango", "lemon"]
+length = len(fruit)
+for i in range(length):
+    print(fruit[length - i - 1])
+
+# 13 Go to the data folder and use the countries_data.py file.
+import json
+
+with open("countries_data.json", "r") as archivo:
+    # Lee el contenido del archivo y carga los datos en una variable
+    countries_data = json.load(archivo)
+
+### What are the total number of languages in the data
+unique_languages = set()
+
+for dictionary in countries_data:
+    if "languages" in dictionary:
+        languages = dictionary["languages"]
+        unique_languages.update(languages)
+number_unique_languages = len(unique_languages)
+
+print(number_unique_languages)
+
+### Find the ten most spoken languages from the data
+
+
+### Find the 10 most populated countries in the world
