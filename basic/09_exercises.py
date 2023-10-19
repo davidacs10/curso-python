@@ -98,6 +98,7 @@ for i in range(length):
 
 # 13 Go to the data folder and use the countries_data.py file.
 import json
+from collections import Counter
 
 with open("countries_data.json", "r") as archivo:
     # Lee el contenido del archivo y carga los datos en una variable
@@ -115,6 +116,23 @@ number_unique_languages = len(unique_languages)
 print(number_unique_languages)
 
 ### Find the ten most spoken languages from the data
+ten_languages = []
 
+for languages in countries_data:
+    if "languages" in languages:
+        languages = languages["languages"]
+        ten_languages.extend(languages)
+
+languages_frecuency = Counter(ten_languages)
+
+languages_10 = languages_frecuency.most_common(10)
+
+for i, _ in languages_10:
+    print(f"{i}:{_} paises")
 
 ### Find the 10 most populated countries in the world
+sorted_countries = sorted(countries_data, key=lambda x: x["population"], reverse=True)
+top_10_countries = sorted_countries[:10]
+
+for country in top_10_countries:
+    print(f"{country['name']}: {country['population']} habitantes")
