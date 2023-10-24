@@ -144,12 +144,96 @@ print(capitalize_list_items(vegetables))
 
 
 # 11 Declare a function named add_item. It takes a list and an item parameters. It returns a list with the item added at the end.
-def add_item(list, string):
-    list = []
-    for i in string:
-        list.append([i])
+def add_item(list, element):
+    list.append(element)
     return list
 
 
 food_staff = ["Potato", "Tomato", "Mango", "Milk"]
 print(add_item(food_staff, "Meat"))
+
+
+# 12 Declare a function named remove_item. It takes a list and an item parameters. It returns a list with the item removed from it.
+def remove_item(list, remove_element):
+    list.remove(remove_element)
+    return list
+
+
+print(remove_item(food_staff, "Potato"))
+
+
+# 13 Declare a function named sum_of_numbers. It takes a number parameter and it adds all the numbers in that range.
+def sum_of_numbers(num):
+    addition = 0
+    for i in range(num + 1):
+        addition = i + addition
+    return addition
+
+
+print(sum_of_numbers(100))
+
+
+# 14 Declare a function named sum_of_odds. It takes a number parameter and it adds all the odd numbers in that range.
+def sum_of_odds(odd):
+    addition = 0
+    for i in range(odd + 1):
+        if i % 2 == 1:
+            addition = addition + i
+    return addition
+
+
+print(sum_of_odds(10))
+
+
+# 15 Declare a function named sum_of_even. It takes a number parameter and it adds all the even numbers in that range.
+def sum_of_odds(even):
+    addition = 0
+    for i in range(even + 1):
+        if i % 2 == 0:
+            addition = addition + i
+    return addition
+
+
+print(sum_of_odds(10))
+
+
+# 16 Declare a function named evens_and_odds . It takes a positive integer as parameter and it counts number of evens and odds in the number.
+def evens_and_odds(num):
+    while num < 1:
+        raise ValueError("El numero debe ser positivo")
+    even = []
+    odd = []
+    for i in range(num + 1):
+        if i % 2 == 0:
+            even.append(i)
+        else:
+            odd.append(i)
+    return f"""The number of evens are {len(even)}
+The number of evens are {len(odd)}"""
+
+
+print(evens_and_odds(100))
+
+
+# 17 Call your function factorial, it takes a whole number as a parameter and it return a factorial of the number
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+
+print(factorial(4))
+
+
+# 18 Call your function is_empty, it takes a parameter and it checks if it is empty or not
+def is_empty(*args):
+    if len(args) == 0:
+        return "Is empty"
+    else:
+        return "Is not empty"
+
+
+list = []
+print(is_empty(list))
+print(len(list))
