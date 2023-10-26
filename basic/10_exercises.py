@@ -227,8 +227,8 @@ print(factorial(4))
 
 
 # 18 Call your function is_empty, it takes a parameter and it checks if it is empty or not
-def is_empty(*args):
-    if len(args) == 0:
+def is_empty(list):
+    if len(list) == 0:
         return "Is empty"
     else:
         return "Is not empty"
@@ -236,4 +236,53 @@ def is_empty(*args):
 
 list = []
 print(is_empty(list))
-print(len(list))
+
+
+# 19 Write different functions which take lists. They should calculate_mean, calculate_median,
+# calculate_mode, calculate_range, calculate_variance, calculate_std (standard deviation).
+import statistics
+
+
+def calculate_mean(list):
+    mean = statistics.mean(list)
+    return f"The mean of the list is:{mean}"
+
+
+list = [1, 2, 2.5, 3, 3.5, 1, 1, 2, 3]
+print(calculate_mean(list))
+
+
+def calculate_median(list):
+    median = statistics.median(list)
+    return f"The medium of the list is:{median}"
+
+
+list = [9, 6, 6, 7, 9, 7, 8]
+print(calculate_median(list))
+
+
+def calculate_mode(list):
+    mode = statistics.mode(list)
+    return f"The mode of the list is:{mode}"
+
+
+list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(calculate_mode(list))
+
+
+def calculate_range(list):
+    range = max(list) - min(list)
+    return f"The range of the list is: {range}"
+
+
+numeros = [3, 7, 2, 8, 6, 4, 5, 1, 9]
+print(calculate_range(numeros))
+
+
+def calculate_variance(list):
+    variance = statistics.variance(list)
+    return f"The variance of the list is:{variance}"
+
+
+list = [1, 2, 2.5, 3, 3.5, 1, 1, 2, 7, 8, 6]
+print(calculate_variance(list))
