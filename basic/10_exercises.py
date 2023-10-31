@@ -286,3 +286,25 @@ def calculate_variance(list):
 
 list = [1, 2, 2.5, 3, 3.5, 1, 1, 2, 7, 8, 6]
 print(calculate_variance(list))
+
+
+def calculate_std(list):
+    std = statistics.stdev(list)
+    return f"The standard deviation of the list is:{std}"
+
+
+list = [1, 2, 2.5, 3, 3.5, 1, 1, 2, 7, 8, 6]
+print(calculate_std(list))
+
+
+# 20 Write a function called is_prime, which checks if a number is prime.
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return f"The number {n} is not prime"
+    return f"The number {n} is prime"
+
+
+print(is_prime(6))
