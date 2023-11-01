@@ -308,3 +308,86 @@ def is_prime(n):
 
 
 print(is_prime(6))
+
+
+# 21 Write a functions which checks if all items are unique in the list.
+def is_unique_item(list):
+    unique_items = set()
+    for element in list:
+        if element in unique_items:
+            return "The list has no unique items"
+        unique_items.add(element)
+    return "The list has unique items"
+
+
+list = [1, 2, 3, 4, 5]
+print(is_unique_item(list))
+
+
+# 22 Write a function which checks if all the items of the list are of the same data type.
+def same_data_type(list):
+    if len(list) == 0:
+        return "It has no elements"
+    for i in list:
+        if type(i) != type(list[0]):
+            return "Not all elements have the same datatype"
+    return "All elements have the same datatype"
+
+
+list = [1, 2, "3", 4, 5]
+print(same_data_type(list))
+
+# 23 Write a function which check if provided variable is a valid python variable
+import keyword
+
+
+def valid_python_variable(variable_name):
+    if variable_name in keyword.kwlist:
+        return "The name of this variable is reserved"
+
+    if variable_name.isidentifier():
+        return "This name is a valid identifier"
+    else:
+        return "This name is not a valid identifier"
+
+
+print(valid_python_variable("raise"))
+print(valid_python_variable("1var"))
+print(valid_python_variable("my_var"))
+
+# 24 Vaya a la carpeta de datos y acceda al archivo countries-data.py.
+import json
+from collections import Counter
+
+with open("countries_data.json", "r") as file:
+    countries_data = json.load(file)
+
+
+# 24.1 Cree una función llamada most_spoken_languages en el mundo.
+# Debería devolver los 10 o 20 idiomas más hablados del mundo en orden descendente.
+def most_spoken_languages(countries_data, top_n=10):
+    ten_languages = []
+
+    for languages in countries_data:
+        if "languages" in languages:
+            languages = languages["languages"]
+            ten_languages.extend(languages)
+
+    languages_frecuency = Counter(ten_languages)
+
+    languages_10 = languages_frecuency.most_common(top_n)
+
+    for i, _ in languages_10:
+        return f"{i}:{_} paises"
+
+
+# 24.2 Cree una función llamada most_populated_countries.
+# Debería devolver los 10 o 20 países más poblados en orden descendente.
+def most_populated_countries(countries_data, top_n=10):
+    sorted_countries = sorted(
+        countries_data["countries"], key=lambda x: x["population"], reverse=True
+    )
+    return sorted_countries[:top_n]
+
+
+print(most_spoken_languages(countries_data, 5))
