@@ -46,7 +46,9 @@ class Statistics:
         return f"Standard deviation: {statistics.stdev(self.list)}"
 
     def frecuency_distribution(self):
-        return f"Frequency Distribution: {statistics.frq}"
+        from collections import Counter
+
+        return dict(Counter(self.list))
 
 
 ages = [
@@ -88,3 +90,53 @@ print(data.median())
 print(data.mode())
 print(data.variance())
 print(data.stddev())
+print(data.frecuency_distribution())
+
+# 2 Create a class called PersonAccount. It has firstname, lastname, incomes, expenses properties and it has total_income, total_expense, account_info, add_income, add_expense and account_balance methods. Incomes is a set of incomes and its description. The same goes for expenses.
+
+
+class PersonAccount:
+    def __init__(
+        self,
+        firstname,
+        lastname,
+    ):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.incomes = {}
+        self.expenses = {}
+
+    def add_incomes(self, amount, description):
+        self.incomes[description] = amount
+
+    def add_expenses(self, amount, description):
+        self.expenses[description] = amount
+
+    def total_incomes(self):
+        return sum(self.incomes.values())
+
+    def total_expenses(self):
+        return sum(self.expenses.values())
+
+    def account_balance(self):
+        return self.total_incomes() - self.total_expenses()
+
+    def account_info(self):
+        info = f"{self.firstname} {self.lastname}.\n"
+        info += f"Incomes: {self.incomes}.\n"
+        info += f"Expenses: {self.expenses}.\n"
+        info += f"Total incomes: {self.total_incomes()}.\n"
+        info += f"Total expenses: {self.total_expenses()}.\n"
+        info += f"Account balance: {self.account_balance()}."
+        return info
+
+
+person_account = PersonAccount("David", "Campos")
+
+person_account.add_incomes(1000, "Salary")
+person_account.add_incomes(500, "Sales")
+person_account.add_expenses(300, "Rent")
+person_account.add_expenses(30, "Ethernet")
+person_account.add_expenses(100, "Food")
+person_account.account_balance()
+print(person_account.account_info())
