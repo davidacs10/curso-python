@@ -47,3 +47,39 @@ except ValueError as error:
     print(error)
 except Exception as my_random_error_name:
     print(my_random_error_name)
+
+# try:
+#     name = input("Your name: ")
+#     year_born = input("Year you were born: ")
+#     age = 2023 - year_born
+#     print(f"{name} is {age} years old")
+# except TypeError:
+#     print("Type error occured")
+# # Hasta aqui ha ocurrido un error pero no sabemos cual es. Para analizar el problema podemos usar los diferentes tipos de error
+# except ValueError:
+#     print("Value error occured")
+# except ZeroDivisionError:
+#     print("Zero Division error occured")
+# else:
+#     print("I usually run with the try block")
+# finally:
+#     print("I always run")
+
+# Tambien se puede acortar el codigo de la siguiente manera
+# try:
+#     name = input("Your name: ")
+#     year_born = input("Year you were born: ")
+#     age = 2023 - year_born
+#     print(f"{name} is {age} years old")
+# except Exception as e:
+#     print(e)
+
+# Desembalaje
+
+
+def sum_all_numbers(a, b, c, d, e):
+    return a + b + c + d + e
+
+
+list = [1, 2, 3, 4, 5]
+print(sum_all_numbers(*list))
