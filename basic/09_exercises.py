@@ -100,7 +100,7 @@ for i in range(length):
 import json
 from collections import Counter
 
-with open("countries_data.json", "r") as archivo:
+with open("basic/countries_data.json", "r") as archivo:
     # Lee el contenido del archivo y carga los datos en una variable
     countries_data = json.load(archivo)
 
@@ -131,8 +131,8 @@ for i, _ in languages_10:
     print(f"{i}:{_} paises")
 
 ### Find the 10 most populated countries in the world
-sorted_countries = sorted(countries_data, key=lambda x: x["population"], reverse=True)
-top_10_countries = sorted_countries[:10]
+# sorted_countries = sorted(countries_data, key=lambda x: x["population"], reverse=True)
+# top_10_countries = sorted_countries[:10]
 
-for country in top_10_countries:
-    print(f"{country['name']}: {country['population']} habitantes")
+# for country in top_10_countries:
+#     print(f"{country['name']}: {country['population']} habitantes")
