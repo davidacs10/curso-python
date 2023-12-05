@@ -298,7 +298,48 @@ def check_data_type(lst):
 lst = ["1", "hola", "hola"]
 print(check_data_type(lst))
 
+
 # 23 Write a function which check if provided variable is a valid python variable
+def valid_variable(var):
+    return var.isidentifier()
+
+
+print(valid_variable("thirty_days_of_python"))
 # 24 Go to the data folder and access the countries-data.py file.
+import json
+from collections import Counter
+
+with open("data/countries_data.json", "r") as file:
+    data = json.load(file)
+
+
 # 25 Create a function called the most_spoken_languages in the world. It should return 10 or 20 most spoken languages in the world in descending order
+def most_spoken_languages(num):
+    top_languages = []
+    for languages in data:
+        top_languages.extend(languages["languages"])
+
+    most_spoken = Counter(top_languages)
+    top_spoken_languages = most_spoken.most_common(num)
+    print(f"The {num} languages most spoken:")
+    for country, count in top_spoken_languages:
+        print(f"{country}: {count}")
+
+
+most_spoken_languages(11)
+
+
 # 26 Create a function called the most_populated_countries. It should return 10 or 20 most populated countries in descending order.
+def most_populated_countries(num):
+    most_populated = []
+    for country_data in data:
+        most_populated.append((country_data["name"], country_data["population"]))
+
+    most_populated_countries_dict = Counter(dict(most_populated))
+    top_most_populated_countries = most_populated_countries_dict.most_common(num)
+    print(f"The {num} most populated countries in the world:")
+    for country, population in top_most_populated_countries:
+        print(f"{country}: {population}")
+
+
+most_populated_countries(5)
