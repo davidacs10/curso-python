@@ -84,3 +84,45 @@ print(data.mode())
 print(data.stdev())
 print(data.variance())
 print(data.freq_dist())
+
+
+class PersonAccount:
+    def __init__(self, firstname, lastname):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.incomes = {}
+        self.expenses = {}
+
+    def add_incomes(self, amount, description):
+        self.incomes[description] = amount
+
+    def add_expenses(self, amount, description):
+        self.expenses[description] = amount
+
+    def total_incomes(self):
+        return sum(self.incomes.values())
+
+    def total_expenses(self):
+        return sum(self.expenses.values())
+
+    def account_balance(self):
+        return self.total_incomes() - self.total_expenses()
+
+    def account_info(self):
+        info = f"{self.firstname} {self.lastname}.\n"
+        info += f"Incomes: {self.incomes}\n"
+        info += f"Expenses: {self.expenses}\n"
+        info += f"Total incomes: {self.total_incomes()}\n"
+        info += f"Total expenses: {self.total_expenses()}\n"
+        info += f"Account balance: {self.account_balance()}\n"
+        return info
+
+
+person1 = PersonAccount("David", "Campos")
+person1.add_incomes(1000, "Salary")
+person1.add_incomes(500, "Sales")
+person1.add_incomes(500, "Freelance")
+person1.add_expenses(200, "Rent")
+person1.add_expenses(50, "Ethernet")
+person1.add_expenses(200, "Food")
+print(person1.account_info())
