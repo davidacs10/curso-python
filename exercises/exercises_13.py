@@ -79,13 +79,13 @@ except:
 #     print("I always run.")
 
 # También se acorta el código anterior de la siguiente manera: Agregando nuestra excepcion a una variable.
-try:
-    name = input("Enter your name:")
-    year_born = input("Year you born:")
-    age = 2019 - (year_born)
-    print(f"You are {name}. And your age is {age}.")
-except Exception as e:
-    print(e)
+# try:
+#     name = input("Enter your name:")
+#     year_born = input("Year you born:")
+#     age = 2019 - (year_born)
+#     print(f"You are {name}. And your age is {age}.")
+# except Exception as e:
+#     print(e)
 
 
 # Desembalaje
@@ -95,12 +95,33 @@ def sum_all_nums(a, b, c, d, e):
 
 lst = [1, 2, 3, 4, 5]
 print(sum_all_nums(*lst))
+
+# Tambien se puede hacer la opcion de desempaquetado con la funcion range que espera un inicio y un final
+numbers = range(2, 7)
+print(f"Desempaquetado con la funcion range convertido a lista: {list(numbers)}")
+args = [2, 7]
+numbers = range(*args)
+print(*numbers)
+
+
+# Una lista o una tupla también se puede desempaquetar de la siguiente manera:
 # names = ['Finland', 'Sweden', 'Norway','Denmark','Iceland', 'Estonia','Russia']. Unpack the first five countries and store them in a variable nordic_countries, store Estonia and Russia in es, and ru respectively.
 
 names = ["Finland", "Sweden", "Norway", "Denmark", "Iceland", "Estonia", "Russia"]
 *nordic_countries, es, ru = names
 print(nordic_countries, es, ru)
 
+numbers = [1, 2, 3, 4, 5, 6, 7]
+one, *middle, last = numbers
+print(one, middle, last)
 
+
+# Desempaquetado de diccionarios
+def unpacking_person_info(name, country, city, age):
+    return f"{name} lives in {country}, {city}. He is {age} year old."
+
+
+dct = {"name": "David", "country": "Venezuela", "city": "Caracas", "age": 25}
+print(unpacking_person_info(**dct))
 for index, item in enumerate([20, 30, 40]):
     print(index, item)
