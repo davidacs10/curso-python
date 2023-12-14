@@ -123,5 +123,54 @@ def unpacking_person_info(name, country, city, age):
 
 dct = {"name": "David", "country": "Venezuela", "city": "Caracas", "age": 25}
 print(unpacking_person_info(**dct))
+
+
+# Embalaje
+def sum_all(*args):
+    s = 0
+    for i in args:
+        s += i
+    return f"La suma de todos los numeros es: {s}"
+
+
+print(sum_all(1, 2, 3))
+print(sum_all(1, 2, 3, 4, 5, 6, 7))
+
+
+# Embalaje de diccionarios
+def packing_person_info(**kwargs):
+    for key in kwargs:
+        print(f"{key} = {kwargs[key]}")
+    return kwargs
+
+
+print(packing_person_info(name="David", lastname="Campos", city="Caracas", age="25"))
+
+# Propagación en Python
+lst_one = [1, 2, 3]
+lst_two = [4, 5, 6, 7]
+lst_numbers = [0, *lst_one, *lst_two]
+print(lst_numbers)
+
+country_lst_one = ["Finland", "Sweden", "Norway"]
+country_lst_two = ["Denmark", "Iceland"]
+nordic_countries = [*country_lst_one, *country_lst_two]
+print(nordic_countries)
+
+# Enumeracion
+for index, item in enumerate(nordic_countries):
+    if item == "Finland":
+        print(f"The country '{item}' has been found at index {index}")
+
 for index, item in enumerate([20, 30, 40]):
     print(index, item)
+
+
+# zip
+fruits = ["banana", "orange", "mango", "lemon", "lime"]
+vegetables = ["Tomato", "Potato", "Cabbage", "Onion", "Carrot"]
+fruits_and_veg = []
+for f, v in zip(fruits, vegetables):
+    fruits_and_veg.append({"fruit": f, "vegetable": v})
+
+print(fruits_and_veg)
