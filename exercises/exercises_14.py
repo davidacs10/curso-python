@@ -28,3 +28,15 @@ weight = mass * g
 print(weight)
 print(p)
 print(p["first_name"])
+
+from mymodule import (
+    random_user_id,
+    user_id_gen_by_user,
+    rgb_color_gen,
+    list_of_hexa_colors,
+)
+
+print(random_user_id())
+# print(user_id_gen_by_user())
+print(rgb_color_gen())
+print(list_of_hexa_colors(2))
