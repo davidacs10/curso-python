@@ -34,9 +34,17 @@ from mymodule import (
     user_id_gen_by_user,
     rgb_color_gen,
     list_of_hexa_colors,
+    list_of_rgb_colors,
+    generate_colors,
+    shuffle_list,
 )
 
 print(random_user_id())
 # print(user_id_gen_by_user())
 print(rgb_color_gen())
 print(list_of_hexa_colors(2))
+print(list_of_rgb_colors(4))
+print(generate_colors("HEXA", 4))
+print(generate_colors("RGB", 4))
+numbers = [1, 2, 3, 4, 5]
+print(shuffle_list(numbers))

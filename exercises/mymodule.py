@@ -52,6 +52,29 @@ def rgb_color_gen():
 def list_of_hexa_colors(num_colors):
     colors = []
     for _ in range(num_colors):
-        color = f"#{random.randint(0, 0xFFFFFF):06x}"
+        color = f"#{random.randint(0, 0xFFFFFF):06X}"
         colors.append(color)
     return colors
+
+
+def list_of_rgb_colors(num_colors):
+    colors = []
+    for _ in range(num_colors):
+        color = rgb_color_gen()
+        colors.append(color)
+    return colors
+
+
+def generate_colors(type_color, num_colors):
+    if type_color.lower() == "hexa":
+        return list_of_hexa_colors(num_colors)
+    elif type_color.lower() == "rgb":
+        return list_of_rgb_colors(num_colors)
+    else:
+        return f"Please insert a valid type of color."
+
+
+def shuffle_list(input_list):
+    shuffle_list = input_list.copy()
+    random.shuffle(shuffle_list)
+    return shuffle_list
