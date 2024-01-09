@@ -78,3 +78,13 @@ def shuffle_list(input_list):
     shuffle_list = input_list.copy()
     random.shuffle(shuffle_list)
     return shuffle_list
+
+def seven_random_numbers():
+    random_numbers = set()
+    
+    while len(random_numbers) < 7:
+        number = random.randint(0,9)
+        random_numbers.add(number)
+    
+    array = list(random_numbers)
+    return array
