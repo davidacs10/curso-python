@@ -105,28 +105,84 @@ print(result_sentence)
 # Declare a function called categorize_countries that returns a list of countries with some common pattern (you can find the countries list in this repository as countries.py(eg 'land', 'ia', 'island', 'stan')).
 from countries import countries
 
-def countries_with_ia(value):
-    country_with_ia = value.endswith("ia")
-    return country_with_ia
+def categorize_countries(func):
+    matching_countries = list(filter(func, countries))
+    return matching_countries
 
-# def categorize_countries(lst):
-    
+def pattern(value):
+    return lambda country: value.lower() in country.lower()
 
-print(list(filter(countries_with_ia, countries)))
-#     ctg_land = lst.endswith("land")
-#     ctg_ia = lst.endswith("ia")
-#     ctg_island = lst.endswith("island")
-#     ctg_stan = lst.endswith("stan")
-#     if ctg_land:
-#         return ctg_land
-#     elif ctg_ia:
-#         return ctg_ia
-#     elif ctg_island:
-#         return ctg_island
-#     elif ctg_stan:
-#         return ctg_stan
-    
-# print(list(filter(categorize_countries, countries)))
+print(categorize_countries(pattern("land")))
+print(categorize_countries(pattern("ia")))
+print(categorize_countries(pattern("island")))
+print(categorize_countries(pattern("stan")))
+
 # Create a function returning a dictionary, where keys stand for starting letters of countries and values are the number of country names starting with that letter.
-# Declare a get_first_ten_countries function - it returns a list of first ten countries from the countries.js list in the data folder.
+def count_countries_by_initial_letter():
+    def starts_with_letter(letter):
+        return lambda country: country.lower().startswith(letter.lower())
+    
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    country_counts = {}
+    for letter in alphabet:
+        filtered_countries = list(filter(starts_with_letter(letter), countries))
+        country_counts[letter] = len(filtered_countries)
+
+    return country_counts
+
+print(count_countries_by_initial_letter())
+
+# Declare a get_first_ten_countries function - it returns a list of first ten countries from the countries.py list in the data folder.
+def get_first_ten_countries(lst):
+    return lst[:10]
+
+print(get_first_ten_countries(countries))
 # Declare a get_last_ten_countries function that returns the last ten countries in the countries list.
+def get_last_ten_countries(lst):
+    return lst[-10:]
+
+print(get_last_ten_countries(countries))
+
+### EXERCISES LEVEL 3 ###
+
+# Use the countries_data.py file and follow the tasks below:
+from countries_data import countries_data as data
+# Sort countries by name, by capital, by population
+def sort_by_name():
+    return sorted(data, key= lambda x: x["name"])
+
+def sort_by_capital():
+    return sorted(data, key= lambda x: x["capital"])
+
+def sort_by_population():
+    return sorted(data, key= lambda x: x["population"])
+
+def sort_countries_by(type):
+    if type == "name":
+        return sort_by_name()
+    elif type == "capital":
+        return sort_by_capital()
+    elif type == "population":
+        return sort_by_population()
+
+print(sort_countries_by("name"))
+print(sort_countries_by("capital"))
+print(sort_countries_by("population"))
+
+# Sort out the ten most spoken languages by location.
+def sort_languages_by_location():
+    all_languages = [language for country in data for language in country.get("languages", [])]
+    language_counts = {language: all_languages.count(language) for language in set(all_languages)}
+    sorted_languages = sorted(language_counts.items(), key=lambda x: x[1], reverse=True)
+    return sorted_languages[:10]
+
+print(sort_languages_by_location())
+
+# Sort out the ten most populated countries.
+def sort_countries_by_population():
+
+    sorted_countries = sorted(data, key=lambda x: x["population"], reverse=True)
+    for country in sorted_countries[:10]:
+        print(f"{country['name']}: {country['population']}")
+
+sort_countries_by_population()
