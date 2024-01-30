@@ -1,0 +1,3 @@
+Esto es un ejemplo
+que muestra como abrir y leer un archivo
+luego cerrarlo usando python
