@@ -1,0 +1,12 @@
+{
+    "name": "David",
+    "last_name": "Campos",
+    "age": 24,
+    "country": "Venezuela",
+    "city": "Caracas",
+    "skills": [
+        "HTML",
+        "CSS",
+        "Python"
+    ]
+}

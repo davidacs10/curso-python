@@ -65,6 +65,13 @@ with open ("../intermediate/writin_file.txt", "w") as f:
 
 # os.remove("../intermediate/writtin_file.txt")
 
+"""Si el archivo no existe, el método remove generará un error, 
+por lo que es bueno usar una condición como esta:"""
+if os.path.exists('./files/example.txt'):
+    os.remove('./files/example.txt')
+else:
+    print('The file does not exist')
+
 # Tipos de archivos
 
 """
@@ -111,3 +118,28 @@ print(person_dct["name"])
 person_json = json.dumps(person_dct, indent=4)
 print(type(person_json))
 print(person_json)
+
+# Guardar nuestros archivos como JSON
+with open("../intermediate/json_example.json", "w", encoding="utf-8") as f:
+    json.dump(person_dct, f, ensure_ascii=False, indent=4)
+
+# Archivo con extensión csv
+"""
+CSV significa valores separados por comas.
+Por ejemplo:
+"name","country","city","skills"
+"David","Venezuela","Caracas","Python"
+"""
+import csv
+with open("../intermediate/csv_example.csv") as f:
+    csv_reader = csv.reader(f, delimiter=",")
+    line_count = 0
+    for row in csv_reader:
+        if line_count == 0:
+            print(f"Column names are: {', '.join(row)}")
+            line_count += 1
+        else:
+            print(f"\t{row[0]} is a student {row[3]}. He lives in {row[1]}, {row[2]}.")
+            line_count += 1
+    print(f"Numbers of lines {line_count}")
+
