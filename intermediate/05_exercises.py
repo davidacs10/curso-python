@@ -117,3 +117,56 @@ result = most_spoken_languages(file_name, 3)
 
 if result is not None:
     print(result)
+
+"""Read the countries_data.json data file in data directory, 
+create a function that creates a list of the ten most populated countries"""
+def most_populated_countries(filename, top_n):
+    try:
+        with open(filename, 'r') as file:
+                data = json.load(file)
+
+        sorted_countries = sorted(data, key=lambda x: x["population"], reverse=True)
+        top_countries = sorted_countries[:top_n]
+
+        lst = []
+        for country in top_countries:
+            country_data = {"country":country["name"], "population":country["population"]}
+            lst.append(country_data)
+
+        print(lst)
+    except FileNotFoundError:
+        print(f"El archivo '{filename}' no fue encontrado.")
+        return None
+    except json.JSONDecodeError:
+        print(f"Error al decodificar el archivo JSON.")
+        return None
+    except Exception as e:
+        print(f"Error al procesar el archivo: {e}")
+        return None
+file_name = "../curso-python/intermediate/data/countries_data.json"
+most_populated_countries(file_name, 3)
+
+### Exercises: Level 2 ###
+
+# Extract all incoming email addresses as a list from the email_exchange_big.txt file.
+import re
+
+def extract_email_address(archive):
+    with open(archive, "r") as file:
+        content = file.read()
+
+        pattern_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        found_email = re.findall(pattern_email, content)
+
+        return found_email
+    
+archive = "../curso-python/intermediate/data/email_exchanges_big.txt"
+emails = extract_email_address(archive)
+
+if emails:
+    print("Direcciones de correo electrónico encontradas:")
+    for email in emails:
+        print(email)
+else:
+    print("No se encontraron direcciones de correo electrónico en el archivo.")
+
