@@ -151,22 +151,71 @@ most_populated_countries(file_name, 3)
 # Extract all incoming email addresses as a list from the email_exchange_big.txt file.
 import re
 
-def extract_email_address(archive):
-    with open(archive, "r") as file:
-        content = file.read()
+# def extract_email_address(archive):
+#     with open(archive, "r") as file:
+#         content = file.read()
 
-        pattern_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-        found_email = re.findall(pattern_email, content)
+#         pattern_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+#         found_email = re.findall(pattern_email, content)
 
-        return found_email
+#         return found_email
     
-archive = "../curso-python/intermediate/data/email_exchanges_big.txt"
-emails = extract_email_address(archive)
+# archive = "../curso-python/intermediate/data/email_exchanges_big.txt"
+# emails = extract_email_address(archive)
 
-if emails:
-    print("Direcciones de correo electrónico encontradas:")
-    for email in emails:
-        print(email)
-else:
-    print("No se encontraron direcciones de correo electrónico en el archivo.")
+# if emails:
+#     print("Direcciones de correo electrónico encontradas:")
+#     for email in emails:
+#         print(email)
+# else:
+#     print("No se encontraron direcciones de correo electrónico en el archivo.")
 
+"""
+Find the most common words in the English language. Call the name of your function 
+find_most_common_words, it will take two parameters - a string or a file and a positive integer, 
+indicating the number of words. Your function will return an array of tuples in descending order. 
+Check the output
+"""
+
+def find_most_common_words(file_path, num_words):
+    try:
+
+        with open(file_path, "r") as file:
+            text = file.read()
+
+        words = re.findall(r"\b\w+\b", text.lower())
+        word_counts = Counter(words)
+        sorted_words = sorted(word_counts.items(), key=lambda x:x[1], reverse=True)
+        return sorted_words[:num_words]
+    
+    except FileNotFoundError:
+        print(f"Error: El archivo '{file_path}' no fue encontrado.")
+
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+
+
+# Use the function, find_most_frequent_words to find: 
+# a) The ten most frequent words used in Obama's speech
+        
+file = "../curso-python/intermediate/data/obama_speech.txt"
+frequent_words_obama_speech = find_most_common_words(file, 10) 
+print(frequent_words_obama_speech)
+
+# b) The ten most frequent words used in Michelle's speech 
+
+file = "../curso-python/intermediate/data/michelle_obama_speech.txt"
+frequent_words_michelle_speech = find_most_common_words(file, 10)
+print(frequent_words_michelle_speech)
+
+# c) The ten most frequent words used in Trump's speech
+
+file = "../curso-python/intermediate/data/donald_speech.txt"
+frequent_words_trump_speech = find_most_common_words(file, 10)
+print(frequent_words_trump_speech)
+
+# d) The ten most frequent words used in Melina's speech
+
+file = "../curso-python/intermediate/data/melina_trump_speech.txt"
+frequent_words_melina_speech = find_most_common_words(file, 10)
+print(frequent_words_melina_speech)
