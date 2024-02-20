@@ -12,10 +12,11 @@ user_list = [User(id=1, first_name="David", last_name="Campos", age=26, weight=1
             User(id=2, first_name="Jose", last_name="Campos", age=24, weight=1.79),
             User(id=3, first_name="Enny", last_name="Galanton", age=27, weight=1.70)]
 
-router = APIRouter(tags= ["users"],
+router = APIRouter(prefix="/users", 
+                   tags= ["users"], 
                    responses= {404:{"message":"No encontrado"}})
 
-@router.get("/users")
+@router.get("/")
 async def create_user():
     return user_list
 
@@ -27,14 +28,14 @@ async def create_user_json():
 
 @router.get("/user/{id}")
 async def user(id: int):
-    return search_user(id)
+        return search_user(id)
 
 @router.get("/user/")
 async def user(id: int):
     return search_user(id)
 
 # Create
-@router.post("/user/", status_code=201)
+@router.post("/user/", status_code=201, response_model=User)
 async def user(user: User):
     if type(search_user(user.id)) == User:
         raise HTTPException(status_code=409, detail="El usuario ya existe.")
@@ -54,7 +55,9 @@ async def user(user: User):
             found = True
     
     if not found:
-        return {"error": "No se ha encontrado el usuario"}
+        raise HTTPException(status_code=304, 
+                            detail={"Error":"No se ha encontrado el usuario"}, 
+                            headers={"304":"Usuario no encontrado"})
 
     return user
 
@@ -69,9 +72,13 @@ async def user(id: int):
             found = True
     
     if not found:
-        return {"error": "No se ha eliminado el usuario"}
+        raise HTTPException(status_code=405, 
+                            detail="El usuario no existe", 
+                            headers={"405": "El usuario no existe"})
     
-    return {"200": "Se ha eliminado el usuario"}
+    raise HTTPException(status_code=200, 
+                            detail="Usuario eliminado con exito", 
+                            headers={"200": "Usuario eliminado con exito"})
 
 
 # Funcion para buscar id
@@ -80,5 +87,7 @@ def search_user(id: int):
     try:
         return list(users)[0]
     except:
-        return {"error": "No se ha encontrado el id solicitado"}
+        raise HTTPException(status_code=404, 
+                            detail="User not found", 
+                            headers={"404": "User not found"})
 
