@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 
 class User(BaseModel):
@@ -14,7 +14,7 @@ user_list = [User(id=1, first_name="David", last_name="Campos", age=26, weight=1
 
 router = APIRouter(prefix="/users", 
                    tags= ["users"], 
-                   responses= {404:{"message":"No encontrado"}})
+                   responses= {status.HTTP_404_NOT_FOUND:{"message":"No encontrado"}})
 
 @router.get("/")
 async def create_user():
