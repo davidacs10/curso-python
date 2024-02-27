@@ -11,8 +11,8 @@ router = APIRouter(prefix="/usersdb",
                    responses= {status.HTTP_404_NOT_FOUND:{"message":"No encontrado"}})
 
 @router.get("/")
-async def create_user():
-    return user_list
+async def get_users():
+    return db_client.users.find()
 
 @router.get("{id}")
 async def user(id: int):
@@ -25,16 +25,15 @@ async def user(id: int):
 # Create
 @router.post("/", response_model=User, status_code=status.HTTP_201_CREATED)
 async def user(user: User):
-    # if type(search_user(user.id)) == User:
-    #     raise HTTPException(status_code=409, detail="El usuario ya existe.")
-    # user_list.append(user)
+    if type(search_user_by_email(user.email)) == User:
+        raise HTTPException(status_code=409, detail="El usuario ya existe.")
 
     user_dict = dict(user)
     del user_dict["id"]
 
-    id = db_client.local.users.insert_one(user_dict).inserted_id
+    id = db_client.users.insert_one(user_dict).inserted_id
 
-    new_user = user_schema(db_client.local.users.find_one({"_id":id}))
+    new_user = user_schema(db_client.users.find_one({"_id":id}))
 
     return User(**new_user)
 
@@ -76,13 +75,15 @@ async def user(id: int):
                             headers={"200": "Usuario eliminado con exito"})
 
 
-# Funcion para buscar id
-# def search_user(id: int):
-#     users = filter(lambda user: user.id == id, user_list)
-#     try:
-#         return list(users)[0]
-#     except:
-#         raise HTTPException(status_code=404, 
-#                             detail="User not found", 
-#                             headers={"404": "User not found"})
+# Funcion para buscar email
+def search_user_by_email(email: str):
+    try:
+        user = db_client.users.find_one({"email":email})
+        return User(**user_schema(user))
+    except:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, 
+                            detail="User not found", 
+                            headers={"404": "User not found"})
 
+async def search_user():
+    pass
